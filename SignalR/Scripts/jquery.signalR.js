@@ -197,6 +197,33 @@
     signalR.fn.init.prototype = signalR.fn;
 
     // Transports
+    var ajaxSend = function (connection, data, transport) {
+        /// <summary>Sends data over this connection</summary>
+        /// <param name="connection" type="signalR">The SignalR connection to send data over</param>
+        /// <param name="data" type="String">The data to send</param>
+        /// <param name="callback" type="Function">A callback to be invoked when the send has completed</param>
+        $.ajax(connection.url + '/send', {
+            type: "POST",
+            dataType: "json",
+            data: {
+                data: data,
+                transport: transport,
+                clientId: connection.clientId
+            },
+            success: function (result) {
+                if (result) {
+                    $(connection).trigger("onReceived", [result]);
+                }
+            },
+            error: function (data, textStatus) {
+                if (textStatus === "abort") {
+                    return;
+                }
+                $(connection).trigger("onError", [data]);
+            }
+        });
+    };
+
     signalR.transports = {
 
         webSockets: {
@@ -264,6 +291,82 @@
                 if (connection.socket !== null) {
                     connection.socket.close();
                     connection.socket = null;
+                }
+            }
+        },
+
+        serverSentEvents: {
+            start: function (connection, onSuccess, onFailed) {
+                var that = this,
+                    opened = false,
+                    url = connection.url + "/connect";
+
+                if (connection.eventSource) {
+                    connection.stop();
+                }
+
+                if (!window.EventSource) {
+                    onFailed();
+                    return;
+                }
+
+                $(connection).trigger("onSending");
+                if (connection.data) {
+                    url += "?data=" + connection.data + "&transport=serverSentEvents&clientId=" + connection.clientId;
+                } else {
+                    url += "?transport=serverSentEvents&clientId=" + connection.clientId;
+                }
+
+                connection.eventSource = new window.EventSource(url);
+
+                connection.eventSource.addEventListener("open", function (e) {
+                    // opened
+                    opened = true;
+                    onSuccess();
+                }, false);
+
+                connection.eventSource.addEventListener("message", function (e) {
+                    // process messages
+                    console.log("SignalR: EventSource message received - " + e.data);
+                    if (e.data === "initialized") {
+                        return;
+                    }
+                    var data = window.JSON.parse(e.data);
+                    if (data) {
+                        if (data.Messages) {
+                            $.each(data.Messages, function () {
+                                $(connection).trigger("onReceived", [this]);
+                            });
+                        } else {
+                            $(connection).trigger("onReceived", [data]);
+                        }
+                    }
+                }, false);
+
+                connection.eventSource.addEventListener("error", function (e) {
+                    if (e.eventPhase == EventSource.CLOSED) {
+                        // connection closed
+                        console.log("SignalR: EventSource closed");
+                        if (!opened) {
+                            onFailed();
+                        }
+                        that.stop();
+                    } else {
+                        // connection error
+                        console.log("SignalR: EventSource error");
+                        $(instance).trigger("onError", [data]);
+                    }
+                }, false);
+            },
+
+            send: function (connection, data) {
+                ajaxSend(connection, data, "serverSentEvents");
+            },
+
+            stop: function (connection) {
+                if (connection.eventSource) {
+                    connection.eventSource.close();
+                    connection.eventSource = null;
                 }
             }
         },
@@ -349,30 +452,7 @@
             },
 
             send: function (connection, data) {
-                /// <summary>Sends data over this connection</summary>
-                /// <param name="connection" type="signalR">The SignalR connection to send data over</param>
-                /// <param name="data" type="String">The data to send</param>
-                /// <param name="callback" type="Function">A callback to be invoked when the send has completed</param>
-                $.ajax(connection.url + '/send', {
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        data: data,
-                        transport: "longPolling",
-                        clientId: connection.clientId
-                    },
-                    success: function (result) {
-                        if (result) {
-                            $(connection).trigger("onReceived", [result]);
-                        }
-                    },
-                    error: function (data, textStatus) {
-                        if (textStatus === "abort") {
-                            return;
-                        }
-                        $(connection).trigger("onError", [data]);
-                    }
-                });
+                ajaxSend(connection, data, "longPolling");
             },
 
             stop: function (connection) {

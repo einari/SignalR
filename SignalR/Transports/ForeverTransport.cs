@@ -4,12 +4,19 @@ using System.Web;
 
 namespace SignalR.Transports {
     public class ForeverTransport : ITransport {
-        private readonly IJsonStringifier _jsonStringifier;
-        private readonly HttpContextBase _context;
+        protected IJsonStringifier JsonStringifier {
+            get;
+            private set;
+        }
+
+        protected HttpContextBase Context {
+            get;
+            private set;
+        }
 
         public ForeverTransport(HttpContextBase context, IJsonStringifier jsonStringifier) {
-            _context = context;
-            _jsonStringifier = jsonStringifier;
+            Context = context;
+            JsonStringifier = jsonStringifier;
         }
 
         public event Action<string> Received;
@@ -21,43 +28,58 @@ namespace SignalR.Transports {
         public event Action<Exception> Error;
 
         public Func<Task> ProcessRequest(IConnection connection) {
-            if (_context.Request.Path.EndsWith("/send")) {
-                string data = _context.Request["data"];
-                if (Received != null) {
-                    Received(data);
-                }
+            if (Context.Request.Path.EndsWith("/send")) {
+                
+                string data = Context.Request["data"];
+                OnReceived(data);
             }
             else {
                 if (Connected != null) {
                     Connected();
                 }
 
-                // Don't timeout and never buffer any output
-                connection.ReceiveTimeout = TimeSpan.FromTicks(Int32.MaxValue - 1);
-                _context.Response.BufferOutput = false;
-                _context.Response.Buffer = false;
+                InitializeResponse(connection);
                 return () => ProcessMessages(connection);
             }
 
             return null;
         }
 
+        protected virtual void InitializeResponse(IConnection connection) {
+            // Don't timeout and never buffer any output
+            connection.ReceiveTimeout = TimeSpan.FromTicks(Int32.MaxValue - 1);
+            Context.Response.BufferOutput = false;
+            Context.Response.Buffer = false;
+            //Context.Response.CacheControl = "no-cache";
+        }
+
+        protected void OnReceived(string data) {
+            if (Received != null) {
+                Received(data);
+            }
+        }
+
         private Task ProcessMessages(IConnection connection) {
-            if (_context.Response.IsClientConnected) {
+            //if (Context.Response.IsClientConnected) {
                 return connection.ReceiveAsync().ContinueWith(t => {
                     Send(t.Result);
                     return ProcessMessages(connection);
                 }).Unwrap();
-            }
+            //}
 
-            if (Disconnected != null) {
-                Disconnected();
-            }
-            return TaskAsyncHelper.Empty;
+            //if (Disconnected != null) {
+            //    Disconnected();
+            //}
+
+            //return TaskAsyncHelper.Empty;
         }
 
         public void Send(object value) {
-            _context.Response.Write(_jsonStringifier.Stringify(value));
+            Context.Response.Write(JsonStringifier.Stringify(value));
+        }
+
+        protected virtual void Send(PersistentResponse response) {
+            Send((object)response);
         }
     }
 }

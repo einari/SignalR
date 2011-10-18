@@ -106,7 +106,8 @@ namespace SignalR.Transports {
             return null;
         }
 
-        public virtual void Send(PersistentResponse response) {
+
+        private void Send(PersistentResponse response) {
             _heartBeat.RemoveConnection(this);
 
             AddTransportData(response);
