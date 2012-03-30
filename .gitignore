@@ -21,3 +21,12 @@ PublishProfiles/
 *.psess
 *.vsp
 *.csv
+
+
+# Mono
+*.pidb
+*.userprefs
+
+
+# OSX
+.DS_Store
