@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Mono", "SignalR\SignalR.Mono.csproj", "{1B9A82C4-BCA1-4834-A33E-226F17BE070B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Hosting.AspNet.Mono", "SignalR.Hosting.AspNet\SignalR.Hosting.AspNet.Mono.csproj", "{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Hosting.Common.Mono", "SignalR.Hosting.Common\SignalR.Hosting.Common.Mono.csproj", "{3B71F0AE-D4B6-4F47-BF62-333D45615673}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Hosting.AspNet.Samples.Mono", "SignalR.Hosting.AspNet.Samples\SignalR.Hosting.AspNet.Samples.Mono.csproj", "{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Debug|x86.Build.0 = Debug|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|x86.ActiveCfg = Release|Any CPU
+		{0E513AE2-BEA8-40CF-B9F2-102B351F2FB2}.Release|x86.Build.0 = Release|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B9A82C4-BCA1-4834-A33E-226F17BE070B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Debug|x86.Build.0 = Debug|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EA34A62-E03E-45CF-A9C9-82D2DA0FCD82}.Release|x86.Build.0 = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Debug|x86.Build.0 = Debug|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|x86.ActiveCfg = Release|Any CPU
+		{3B71F0AE-D4B6-4F47-BF62-333D45615673}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = SignalR.Hosting.AspNet.Samples\SignalR.Hosting.AspNet.Samples.Mono.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
